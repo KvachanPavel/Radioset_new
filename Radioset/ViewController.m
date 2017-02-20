@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "Recorder.h"
+#import "Player.h"
+
 
 @interface ViewController ()
 
@@ -18,7 +21,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
+- (IBAction)Start:(id)sender
+{
+    [Recorder sharedRecorder].isStart = YES;
+    [Player sharedPlayer].isStart = YES;
+    
+    memcpy([Player sharedPlayer].buffer.mData, [Recorder sharedRecorder].buffer.mData, [Recorder sharedRecorder].buffer.mDataByteSize);
+    
+    
+}
 
+- (IBAction)Stop:(id)sender
+{
+    [Recorder sharedRecorder].isStart = NO;
+    [Player sharedPlayer].isStart = NO;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
