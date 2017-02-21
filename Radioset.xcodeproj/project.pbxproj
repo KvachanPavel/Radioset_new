@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8BE6B57A1E5C2CA700C77AA6 /* MultipeerConnectivity.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BE6B5791E5C2CA700C77AA6 /* MultipeerConnectivity.framework */; };
+		8BE6B57D1E5C2E4A00C77AA6 /* MultipeerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE6B57C1E5C2E4A00C77AA6 /* MultipeerViewController.m */; };
 		8E13C3771E5B893000A5F788 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E13C3761E5B893000A5F788 /* main.m */; };
 		8E13C37A1E5B893000A5F788 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E13C3791E5B893000A5F788 /* AppDelegate.m */; };
 		8E13C3801E5B893000A5F788 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E13C37E1E5B893000A5F788 /* Main.storyboard */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8BE6B5791E5C2CA700C77AA6 /* MultipeerConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MultipeerConnectivity.framework; path = System/Library/Frameworks/MultipeerConnectivity.framework; sourceTree = SDKROOT; };
+		8BE6B57B1E5C2E4A00C77AA6 /* MultipeerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipeerViewController.h; sourceTree = "<group>"; };
+		8BE6B57C1E5C2E4A00C77AA6 /* MultipeerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipeerViewController.m; sourceTree = "<group>"; };
 		8E13C3721E5B893000A5F788 /* Radioset.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Radioset.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E13C3761E5B893000A5F788 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E13C3781E5B893000A5F788 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -44,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE6B57A1E5C2CA700C77AA6 /* MultipeerConnectivity.framework in Frameworks */,
 				8E13C38E1E5B893E00A5F788 /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,6 +102,7 @@
 		8E13C38C1E5B893E00A5F788 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BE6B5791E5C2CA700C77AA6 /* MultipeerConnectivity.framework */,
 				8E13C38D1E5B893E00A5F788 /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
@@ -110,6 +117,8 @@
 				8E8D507A1E5BA5260021D5BB /* Player.m */,
 				8E8D507C1E5BB06C0021D5BB /* AudioProcessor.h */,
 				8E8D507D1E5BB06C0021D5BB /* AudioProcessor.m */,
+				8BE6B57B1E5C2E4A00C77AA6 /* MultipeerViewController.h */,
+				8BE6B57C1E5C2E4A00C77AA6 /* MultipeerViewController.m */,
 			);
 			name = AudioProcessing;
 			sourceTree = "<group>";
@@ -192,6 +201,7 @@
 				8E8D507E1E5BB06C0021D5BB /* AudioProcessor.m in Sources */,
 				8E13C3921E5B8D3800A5F788 /* Recorder.m in Sources */,
 				8E8D507B1E5BA5260021D5BB /* Player.m in Sources */,
+				8BE6B57D1E5C2E4A00C77AA6 /* MultipeerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +323,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4DSD7FVJ63;
 				INFOPLIST_FILE = Radioset/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kvachan.Radioset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -325,6 +336,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 4DSD7FVJ63;
 				INFOPLIST_FILE = Radioset/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kvachan.Radioset;
 				PRODUCT_NAME = "$(TARGET_NAME)";

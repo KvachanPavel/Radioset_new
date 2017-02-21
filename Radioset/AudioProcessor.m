@@ -25,7 +25,7 @@
         
         AudioComponentDescription description;
         description.componentType = kAudioUnitType_Output;
-        description.componentSubType = kAudioUnitSubType_RemoteIO;
+        description.componentSubType = kAudioUnitSubType_VoiceProcessingIO;//kAudioUnitSubType_RemoteIO;
         description.componentFlags = 0;
         description.componentFlagsMask = 0;
         description.componentManufacturer = kAudioUnitManufacturer_Apple;

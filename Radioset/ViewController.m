@@ -9,25 +9,49 @@
 #import "ViewController.h"
 #import "Recorder.h"
 #import "Player.h"
+#import "MultipeerViewController.h"
 
 
 @interface ViewController ()
+{
+    MultipeerViewController *multipeerViewController;
+    NSOutputStream *outStream;
+}
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    multipeerViewController = [[MultipeerViewController alloc] init];
 }
 - (IBAction)Start:(id)sender
 {
     [Recorder sharedRecorder].isStart = YES;
-    [Player sharedPlayer].isStart = YES;
+//    [Player sharedPlayer].isStart = YES;
     
-    memcpy([Player sharedPlayer].buffer.mData, [Recorder sharedRecorder].buffer.mData, [Recorder sharedRecorder].buffer.mDataByteSize);
+    if (multipeerViewController != nil)
+    {
+        outStream = [multipeerViewController startStream];
+        [outStream write:[Recorder sharedRecorder].buffer.mData maxLength:[Recorder sharedRecorder].buffer.mDataByteSize];
+    }
     
+    
+    
+    
+//    NSLog(@"[Player sharedPlayer].buffer.mDataByteSize = %d", [Player sharedPlayer].buffer.mDataByteSize);
+//    NSLog(@"[Recorder sharedRecorder].buffer.mDataByteSize = %d", [Recorder sharedRecorder].buffer.mDataByteSize);
+//    
+//    NSLog(@"[Player sharedPlayer].buffer.mNumberChannels = %d", [Player sharedPlayer].buffer.mNumberChannels);
+//    NSLog(@"[Recorder sharedRecorder].buffer.mNumberChannels = %d", [Recorder sharedRecorder].buffer.mNumberChannels);
+    
+//    while (true)
+//    {
+//        memcpy([Player sharedPlayer].buffer.mData, [Recorder sharedRecorder].buffer.mData, [Recorder sharedRecorder].buffer.mDataByteSize);
+//    }
     
 }
 
@@ -37,10 +61,13 @@
     [Player sharedPlayer].isStart = NO;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
+- (IBAction)ShowBrowser:(id)sender
+{
+    [self presentViewController:(UIViewController *)multipeerViewController.browserViewController
+                       animated:YES
+                     completion:nil];
+
+}
 
 @end
