@@ -8,13 +8,16 @@
 
 #import "ViewController.h"
 
+
 @class MCBrowserViewController;
 
-@interface MultipeerViewController : ViewController
+@interface MultipeerViewController : ViewController <NSStreamDelegate>
 
 @property (nonatomic, readonly) MCBrowserViewController *browserViewController;
 
+@property (nonatomic, readonly) NSOutputStream *stream;
 
-- (NSOutputStream *)startStream;
+
+//- (NSOutputStream *)startStream;
 
 @end

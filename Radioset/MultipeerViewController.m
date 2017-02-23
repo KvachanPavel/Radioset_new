@@ -75,6 +75,13 @@ NSString * const KPServiceType = @"KPServiceType";
                                                       toPeer:_mySession.connectedPeers[0]
                                                        error:&error];
     
+    if (error != nil)
+    {
+        NSLog(error);
+    }
+    
+    [stream open];
+    
     return stream;
 }
 
@@ -118,10 +125,16 @@ NSString * const KPServiceType = @"KPServiceType";
             break;
             
         case MCSessionStateConnected:
+            _stream = [self startStream];
             NSLog(@"connected");
             break;
             
         case MCSessionStateNotConnected:
+            
+            if (_stream != nil)
+            {
+                _stream = nil;
+            }
             NSLog(@"NotConnected");
             break;
             
@@ -138,13 +151,35 @@ NSString * const KPServiceType = @"KPServiceType";
     NSLog(@"didReceiveData");
 }
 
+#define BUFFER_LEN 10000
+
 // Received a byte stream from remote peer.
 - (void)    session:(MCSession *)session
    didReceiveStream:(NSInputStream *)stream
            withName:(NSString *)streamName
            fromPeer:(MCPeerID *)peerID
 {
-    NSLog(@"didReceiveStream");    
+    int result = 0;
+    uint8_t buffer[BUFFER_LEN];
+//
+    while((result = [stream read:buffer maxLength:BUFFER_LEN]) != 0)
+    {
+        if(result > 0)
+        {
+            NSLog(@"YES");
+            // buffer contains result bytes of data to be handled
+        }
+        else
+        {
+            NSLog(@"NO");
+            // The stream had an error. You can get an NSError object using [iStream streamError]
+        }
+    }
+//    [stream open];
+//    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+//    [stream setDelegate:self];
+    
+    NSLog(@"didReceiveStream");
 }
 
 // Start receiving a resource from remote peer.
@@ -167,6 +202,48 @@ NSString * const KPServiceType = @"KPServiceType";
 {
     
 }
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode;
+{
+    BOOL shouldClose = NO;
+    NSLog(@"delegate");
+//    switch(eventCode)
+//    {
+//        case  NSStreamEventEndEncountered:
+//            NSLog(@"NSStreamEventEndEncountered");
+//            shouldClose = YES;
+//            // If all data hasn't been read, fall through to the "has bytes" event
+//            if(!aStream.hasBytesAvailable) break;
+//        case NSStreamEventHasBytesAvailable: ; // We need a semicolon here before we can declare local variables
+//            NSLog(@"NSStreamEventHasBytesAvailable");
+//            uint8_t *buffer;
+//            NSUInteger length;
+//            BOOL freeBuffer = NO;
+//            // The stream has data. Try to get its internal buffer instead of creating one
+//            if(![iStream getBuffer:&buffer length:&length]) {
+//                // The stream couldn't provide its internal buffer. We have to make one ourselves
+//                buffer = malloc(BUFFER_LEN * sizeof(uint8_t));
+//                freeBuffer = YES;
+//                NSInteger result = [iStream read:buffer maxLength:BUFFER_LEN];
+//                if(result < 0) {
+//                    // error copying to buffer
+//                    break;
+//                }
+//                length = result;
+//            }
+//            // length bytes of data in buffer
+//            if(freeBuffer) free(buffer);
+//            break;
+//        case NSStreamEventErrorOccurred:
+//            NSLog(@"NSStreamEventErrorOccurred");
+//            // some other error
+//            shouldClose = YES;
+//            break;
+//    }
+//    if(shouldClose) [iStream close];
+}
+
+
 
 
 

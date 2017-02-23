@@ -16,7 +16,7 @@
 		8E13C3851E5B893000A5F788 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E13C3831E5B893000A5F788 /* LaunchScreen.storyboard */; };
 		8E13C38E1E5B893E00A5F788 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E13C38D1E5B893E00A5F788 /* AudioToolbox.framework */; };
 		8E13C3921E5B8D3800A5F788 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E13C3911E5B8D3800A5F788 /* Recorder.m */; };
-		8E8D50781E5B9E080021D5BB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D50771E5B9E080021D5BB /* ViewController.m */; };
+		8E8D50781E5B9E080021D5BB /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D50771E5B9E080021D5BB /* ViewController.mm */; };
 		8E8D507B1E5BA5260021D5BB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D507A1E5BA5260021D5BB /* Player.m */; };
 		8E8D507E1E5BB06C0021D5BB /* AudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D507D1E5BB06C0021D5BB /* AudioProcessor.m */; };
 /* End PBXBuildFile section */
@@ -37,7 +37,7 @@
 		8E13C3901E5B8D3800A5F788 /* Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
 		8E13C3911E5B8D3800A5F788 /* Recorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
 		8E8D50761E5B9E080021D5BB /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		8E8D50771E5B9E080021D5BB /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8E8D50771E5B9E080021D5BB /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		8E8D50791E5BA5260021D5BB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		8E8D507A1E5BA5260021D5BB /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
 		8E8D507C1E5BB06C0021D5BB /* AudioProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioProcessor.h; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				8E8D50761E5B9E080021D5BB /* ViewController.h */,
-				8E8D50771E5B9E080021D5BB /* ViewController.m */,
+				8E8D50771E5B9E080021D5BB /* ViewController.mm */,
 				8E13C38F1E5B8D0500A5F788 /* AudioProcessing */,
 				8E13C3781E5B893000A5F788 /* AppDelegate.h */,
 				8E13C3791E5B893000A5F788 /* AppDelegate.m */,
@@ -197,7 +197,7 @@
 			files = (
 				8E13C37A1E5B893000A5F788 /* AppDelegate.m in Sources */,
 				8E13C3771E5B893000A5F788 /* main.m in Sources */,
-				8E8D50781E5B9E080021D5BB /* ViewController.m in Sources */,
+				8E8D50781E5B9E080021D5BB /* ViewController.mm in Sources */,
 				8E8D507E1E5BB06C0021D5BB /* AudioProcessor.m in Sources */,
 				8E13C3921E5B8D3800A5F788 /* Recorder.m in Sources */,
 				8E8D507B1E5BA5260021D5BB /* Player.m in Sources */,
