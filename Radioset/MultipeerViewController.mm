@@ -8,15 +8,18 @@
 
 #import "MultipeerViewController.h"
 #import <MultipeerConnectivity/MultipeerConnectivity.h>
+#import "Player.h"
 
 NSString * const KPServiceType = @"KPServiceType";
 
-@interface MultipeerViewController () <MCBrowserViewControllerDelegate, MCSessionDelegate>
+@interface MultipeerViewController () <MCBrowserViewControllerDelegate, MCSessionDelegate, NSStreamDelegate>
 {
     MCPeerID  *_myPeerID;
     MCSession *_mySession;
     
     MCAdvertiserAssistant   *_advertiser;
+    
+    Player *_player;
 }
 
 @end
@@ -48,6 +51,8 @@ NSString * const KPServiceType = @"KPServiceType";
                                                                  session:_mySession];
         
         [_advertiser start];
+        
+        _player = [Player sharedPlayer];
 //        [_mySession startStreamWithName:<#(nonnull NSString *)#> toPeer:<#(nonnull MCPeerID *)#> error:<#(NSError *__autoreleasing  _Nullable * _Nullable)#>]        
     }
     return self;
@@ -71,18 +76,21 @@ NSString * const KPServiceType = @"KPServiceType";
 - (NSOutputStream *)startStream
 {
     NSError *error;
-    NSOutputStream *stream = [_mySession startStreamWithName:@"test"
+    NSOutputStream *outStream = [_mySession startStreamWithName:@"test"
                                                       toPeer:_mySession.connectedPeers[0]
                                                        error:&error];
     
     if (error != nil)
     {
-        NSLog(error);
+//        NSLog(error);
     }
     
-    [stream open];
+    [outStream setDelegate:self];
+    [outStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     
-    return stream;
+    [outStream open];
+    
+    return outStream;
 }
 
 
@@ -155,29 +163,31 @@ NSString * const KPServiceType = @"KPServiceType";
 
 // Received a byte stream from remote peer.
 - (void)    session:(MCSession *)session
-   didReceiveStream:(NSInputStream *)stream
+   didReceiveStream:(NSInputStream *)inStream
            withName:(NSString *)streamName
            fromPeer:(MCPeerID *)peerID
 {
     int result = 0;
     uint8_t buffer[BUFFER_LEN];
 //
-    while((result = [stream read:buffer maxLength:BUFFER_LEN]) != 0)
-    {
-        if(result > 0)
-        {
-            NSLog(@"YES");
-            // buffer contains result bytes of data to be handled
-        }
-        else
-        {
-            NSLog(@"NO");
-            // The stream had an error. You can get an NSError object using [iStream streamError]
-        }
-    }
-//    [stream open];
-//    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-//    [stream setDelegate:self];
+//    while((result = [stream read:buffer maxLength:BUFFER_LEN]) != 0)
+//    {
+//        if(result > 0)
+//        {
+//            NSLog(@"YES");
+//            // buffer contains result bytes of data to be handled
+//        }
+//        else
+//        {
+//            NSLog(@"NO");
+//            // The stream had an error. You can get an NSError object using [iStream streamError]
+//        }
+//    }
+
+    [inStream setDelegate:self];
+    [inStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [inStream open];
+
     
     NSLog(@"didReceiveStream");
 }
@@ -203,43 +213,63 @@ NSString * const KPServiceType = @"KPServiceType";
     
 }
 
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode;
+//NSStreamEventNone = 0,
+//NSStreamEventOpenCompleted = 1UL << 0,
+//NSStreamEventHasBytesAvailable = 1UL << 1,
+//NSStreamEventHasSpaceAvailable = 1UL << 2,
+//NSStreamEventErrorOccurred = 1UL << 3,
+//NSStreamEventEndEncountered = 1UL << 4
+
+- (void)stream:(NSInputStream *)aStream handleEvent:(NSStreamEvent)eventCode;
 {
-    BOOL shouldClose = NO;
+    
+//    BOOL shouldClose = NO;
     NSLog(@"delegate");
-//    switch(eventCode)
-//    {
-//        case  NSStreamEventEndEncountered:
-//            NSLog(@"NSStreamEventEndEncountered");
-//            shouldClose = YES;
-//            // If all data hasn't been read, fall through to the "has bytes" event
-//            if(!aStream.hasBytesAvailable) break;
-//        case NSStreamEventHasBytesAvailable: ; // We need a semicolon here before we can declare local variables
+    switch(eventCode)
+    {
+        case  NSStreamEventEndEncountered:
+            NSLog(@"NSStreamEventEndEncountered");
+            
+            break;
+            
+        case NSStreamEventHasBytesAvailable:
+        {
 //            NSLog(@"NSStreamEventHasBytesAvailable");
-//            uint8_t *buffer;
-//            NSUInteger length;
-//            BOOL freeBuffer = NO;
-//            // The stream has data. Try to get its internal buffer instead of creating one
-//            if(![iStream getBuffer:&buffer length:&length]) {
-//                // The stream couldn't provide its internal buffer. We have to make one ourselves
-//                buffer = malloc(BUFFER_LEN * sizeof(uint8_t));
-//                freeBuffer = YES;
-//                NSInteger result = [iStream read:buffer maxLength:BUFFER_LEN];
-//                if(result < 0) {
-//                    // error copying to buffer
-//                    break;
-//                }
-//                length = result;
-//            }
-//            // length bytes of data in buffer
-//            if(freeBuffer) free(buffer);
-//            break;
-//        case NSStreamEventErrorOccurred:
-//            NSLog(@"NSStreamEventErrorOccurred");
-//            // some other error
+            uint8_t *buffer;
+            NSUInteger length;
+            BOOL freeBuffer = NO;
+            if(![aStream getBuffer:&buffer length:&length]) {
+                buffer = static_cast<uint8_t *>(malloc(_player.buffer.mDataByteSize *  sizeof(uint8_t)));
+                freeBuffer = YES;
+                NSInteger result = [aStream read:buffer maxLength:_player.buffer.mDataByteSize];
+                if(result < 0)
+                {
+                
+                    break;
+                }
+                else
+                {
+                    void *getBuffer = static_cast<void *>(buffer);
+                    
+                    memcpy(_player.buffer.mData, getBuffer, _player.buffer.mDataByteSize);
+                }
+                length = result;
+            }
+            
+            if (freeBuffer)
+            {
+                free(buffer);
+            }
+        }
+            break;
+            
+        case NSStreamEventErrorOccurred:
+        {
+            NSLog(@"NSStreamEventErrorOccurred");
 //            shouldClose = YES;
-//            break;
-//    }
+        }
+            break;
+    }
 //    if(shouldClose) [iStream close];
 }
 
