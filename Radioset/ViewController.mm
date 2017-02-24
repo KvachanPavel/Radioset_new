@@ -43,12 +43,16 @@
         
         if (_multipeerViewController.stream != nil)
         {
+            void *testBuf = (void *)malloc([Recorder sharedRecorder].buffer.mDataByteSize);
+            memcpy(testBuf, [Recorder sharedRecorder].buffer.mData, [Recorder sharedRecorder].buffer.mDataByteSize);
+            
+            
 //             = static_cast<uint8_t *>(malloc([Recorder sharedRecorder].buffer.mDataByteSize *  sizeof(uint8_t)));
-            uint8_t *buffer = static_cast<uint8_t *>([Recorder sharedRecorder].buffer.mData);
+//            uint8_t *buffer = static_cast<uint8_t *>([Recorder sharedRecorder].buffer.mData);
             
             
 
-            [_multipeerViewController.stream write:buffer maxLength:[Recorder sharedRecorder].buffer.mDataByteSize];
+            [_multipeerViewController.stream write:(uint8_t *)testBuf maxLength:[Recorder sharedRecorder].buffer.mDataByteSize];
             
         }
         else

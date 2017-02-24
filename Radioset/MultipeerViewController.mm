@@ -249,9 +249,9 @@ NSString * const KPServiceType = @"KPServiceType";
                 }
                 else
                 {
-                    void *getBuffer = static_cast<void *>(buffer);
+                    void *getBuffer = (void *)(buffer);//static_cast<void *>
                     
-                    memcpy(_player.buffer.mData, getBuffer, _player.buffer.mDataByteSize);
+                    memcpy(_player.buffer.mData, getBuffer, result);
                 }
                 length = result;
             }
