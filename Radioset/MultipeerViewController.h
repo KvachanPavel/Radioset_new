@@ -11,7 +11,7 @@
 
 @class MCBrowserViewController;
 
-@interface MultipeerViewController : ViewController <NSStreamDelegate>
+@interface MultipeerViewController : ViewController
 
 @property (nonatomic, readonly) MCBrowserViewController *browserViewController;
 
