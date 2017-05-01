@@ -325,6 +325,7 @@
 				INFOPLIST_FILE = Radioset/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = Kvachan.Radioset;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
