@@ -16,6 +16,8 @@
 		8E13C3851E5B893000A5F788 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E13C3831E5B893000A5F788 /* LaunchScreen.storyboard */; };
 		8E13C38E1E5B893E00A5F788 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E13C38D1E5B893E00A5F788 /* AudioToolbox.framework */; };
 		8E13C3921E5B8D3800A5F788 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E13C3911E5B8D3800A5F788 /* Recorder.m */; };
+		8E2CFCE51EC226D0008243FE /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2CFCE41EC226D0008243FE /* SWRevealViewController.m */; };
+		8E2CFCE91EC227A2008243FE /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E2CFCE81EC227A2008243FE /* MainViewController.m */; };
 		8E8D50781E5B9E080021D5BB /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D50771E5B9E080021D5BB /* ViewController.mm */; };
 		8E8D507B1E5BA5260021D5BB /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D507A1E5BA5260021D5BB /* Player.m */; };
 		8E8D507E1E5BB06C0021D5BB /* AudioProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D507D1E5BB06C0021D5BB /* AudioProcessor.m */; };
@@ -36,6 +38,10 @@
 		8E13C38D1E5B893E00A5F788 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8E13C3901E5B8D3800A5F788 /* Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
 		8E13C3911E5B8D3800A5F788 /* Recorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
+		8E2CFCE31EC226D0008243FE /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		8E2CFCE41EC226D0008243FE /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		8E2CFCE71EC227A2008243FE /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		8E2CFCE81EC227A2008243FE /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		8E8D50761E5B9E080021D5BB /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		8E8D50771E5B9E080021D5BB /* ViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		8E8D50791E5BA5260021D5BB /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -77,6 +83,7 @@
 		8E13C3741E5B893000A5F788 /* Radioset */ = {
 			isa = PBXGroup;
 			children = (
+				8E2CFCE61EC2278B008243FE /* Sidebar */,
 				8E8D50761E5B9E080021D5BB /* ViewController.h */,
 				8E8D50771E5B9E080021D5BB /* ViewController.mm */,
 				8E13C38F1E5B8D0500A5F788 /* AudioProcessing */,
@@ -121,6 +128,17 @@
 				8BE6B57C1E5C2E4A00C77AA6 /* MultipeerViewController.mm */,
 			);
 			name = AudioProcessing;
+			sourceTree = "<group>";
+		};
+		8E2CFCE61EC2278B008243FE /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				8E2CFCE31EC226D0008243FE /* SWRevealViewController.h */,
+				8E2CFCE41EC226D0008243FE /* SWRevealViewController.m */,
+				8E2CFCE71EC227A2008243FE /* MainViewController.h */,
+				8E2CFCE81EC227A2008243FE /* MainViewController.m */,
+			);
+			name = Sidebar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -198,6 +216,8 @@
 				8E13C37A1E5B893000A5F788 /* AppDelegate.m in Sources */,
 				8E13C3771E5B893000A5F788 /* main.m in Sources */,
 				8E8D50781E5B9E080021D5BB /* ViewController.mm in Sources */,
+				8E2CFCE51EC226D0008243FE /* SWRevealViewController.m in Sources */,
+				8E2CFCE91EC227A2008243FE /* MainViewController.m in Sources */,
 				8E8D507E1E5BB06C0021D5BB /* AudioProcessor.m in Sources */,
 				8E13C3921E5B8D3800A5F788 /* Recorder.m in Sources */,
 				8E8D507B1E5BA5260021D5BB /* Player.m in Sources */,
